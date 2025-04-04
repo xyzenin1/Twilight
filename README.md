@@ -18,8 +18,11 @@ npm start
 Will also need to create a .env file containing:
 
 YOUTUBE_API_KEY=
+
 SPOTIFY_CLIENT_ID=
+
 SPOTIFY_CLIENT_SECRET=
+
 SPOTIFY_REDIRECT_URI=
 
 
