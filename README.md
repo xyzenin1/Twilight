@@ -15,6 +15,14 @@ npm install --save-dev electron
 
 npm start
 
+Will also need to create a .env file containing:
+
+YOUTUBE_API_KEY=
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REDIRECT_URI=
+
+
 Youtube.js:
 
 The Youtube file utilizes the onYouTubeIframeAPIReady function, meaning that it allows Youtube videos to be played without the need to be seen in the app; the video is played in the background, so it acts like an audio player. 
