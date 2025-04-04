@@ -5,7 +5,6 @@ This is an electron-based application that implements both Youtube API and Spoti
 HTML, JavaScript, CSS
 
 The main files are named main.js, youtube.js, spotify.js, and saved_songs.js. The main.js file is responsible for creation of the main window, and the ipcMain.handle aspects of the application, while youtube.js, spotify.js, and saved_songs.js are Renderer files. the youtube.j and spotify.js files are in charge of their own API's, while the saved_songs.js file uses the Youtube API as well.
-You will need to fill in your own youtube and spotify API keys, as the app will not work without it.
 
 The application is electron-based, so the user will need to install the npm packages.
 
