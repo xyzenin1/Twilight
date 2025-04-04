@@ -1,0 +1,690 @@
+body {
+    background-color: black;
+    border-color: white;
+    margin: 0;
+    font-family: "Jersey 10", "consolas";
+    color: white;
+    overflow: hidden;
+}
+
+/* surround app with border */
+#borderbox {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 5px solid;
+    border-color: white;
+    border-style: solid;
+    pointer-events: none; /* Allow clicks to pass through */
+
+}
+
+#frame {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    display: flex;
+}
+
+#exit-button {
+    background-color: black;
+    color: white;
+
+    font-family: "Jersey 10", "consolas";
+    font-size: 14px;
+    border: 4px solid;
+    border-left: 2px;
+    border-color: white;
+
+    transition: background-color 0.25s;
+
+}
+
+#exit-button:hover {
+    background-color: #333;
+}
+
+#reset-button {
+    background-color: black;
+    color: white;
+
+    font-family: "Jersey 10", "consolas";
+    font-size: 14px;
+    border: 4px solid;
+    border-color: white;
+
+    transition: background-color 0.25s;
+
+}
+
+#reset-button:hover {
+    background-color: #333;
+}
+
+/* title */
+h1 {
+    -webkit-app-region: drag;
+    letter-spacing: 5px;
+    color: white;
+    border-style: outset;
+    border-width: 1px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-color: white;
+    text-align: center;
+    font-family: "Jersey 10", "consolas";
+    margin: 20px 50px;
+}
+
+#refresh {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: black;
+    color: white;
+    /* border: 2px solid;
+    border-style: solid; */
+    border-color: black;
+    
+}
+
+#refresh:hover {
+    background-color: #333;
+}
+
+/* song cover */
+#imagebox {
+    background-image: url(./images/midna.jpg);
+    background-size: cover;
+    background-position: center;
+    border: 2px solid;
+    border-color: white;
+    position: absolute;
+    bottom: 250px;
+    top: 130px;
+    left: 85px;
+    right: 85px;
+    transition: background-image 0.3s ease;
+}
+
+/* song title display */
+#now-playing {
+    position: absolute;
+    bottom: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+#song-title {
+    margin: 5px 0;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* menu button */
+#menu {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#menu:hover {
+    background-color: #333;
+}
+
+#switchApi {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    margin: auto;
+    padding: 5px 15px;
+    font-size: 35px;
+    font-family: "Jersey 10", "consolas";
+    cursor: pointer;
+
+    position: absolute;
+    top: 90px;
+    left: 50%;
+
+    transform: translateX(-50%);
+    transition: background-color 0.25s;
+}
+
+#switchApi:hover {
+    background-color: #333;
+}
+
+
+
+/* back button */
+#back {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 95px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#back:hover {
+    background-color: #333;
+}
+
+
+/* queue buttton */
+#queue {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 140px;
+    right: 0%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#queue:hover {
+    background-color: #333;
+}
+
+
+/* queue history */
+#songlist-container {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    bottom: 140px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 10px;
+    /* background-color: white; */
+    
+}
+
+#upcoming-song {
+    font-size: 18px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+#play-next {
+    margin-left: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+#song-history {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+#past-songs {
+    margin-left: 15px;
+}
+
+.history-item {
+    padding: 8px 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px dotted #333;
+    color: white;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.history-item:hover {
+    background-color: #222;
+    color: white;
+}
+
+
+
+/* all songs list button for spotify */
+#savedSongs {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 140px;
+    left: 23%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#savedSongs-container {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    bottom: 140px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 10px;
+    /* background-color: white; */
+    
+}
+
+#savedSongs:hover {
+    background-color: #333;
+}
+
+#savedSongsList {
+    position: absolute;
+    bottom: 45px;
+    top: 65px;
+    left: 0;
+    right: 0;
+    border: 5px solid;
+    border-color: white;
+    border-style: solid;
+}
+
+.saved-playlist-item {
+    padding: 8px;
+    margin: auto;
+    border-radius: 4px;
+    background-color: black;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.saved-playlist-item:hover {
+    background-color: rgba(60, 60, 60, 0.8);
+}
+
+.saved-playlist-item.selected {
+    background-color: #333;
+    border-left: 3px solid #333;
+}
+
+.no-playlists-message {
+    color: #999;
+    text-align: center;
+    padding: 10px;
+}
+
+#createPlaylistButton {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#createPlaylistButton:hover {
+    background-color: #333;
+}
+
+#shuffleButton {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 0px;
+    left: 15%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#shuffleButton:hover {
+    background-color: #333;
+}
+
+#playButton {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 0px;
+    left: 82%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#playButton:hover {
+    background-color: #333;
+}
+
+#deleteButton {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Jersey 10", "consolas";
+    position: absolute;
+    bottom: 0px;
+    left: 83%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+#deleteButton:hover {
+    background-color: #333;
+}
+
+#addSongBar {
+    width: 100%;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: "Jersey 10", "consolas";
+    outline: none;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+#addSongBar::placeholder {
+    text-align: center;
+    color: #888;
+}
+
+
+
+/* Progress bar */
+#progress-container {
+    position: absolute;
+    bottom: 80px;
+    left: 25px;
+    right: 25px;
+    text-align: center;
+}
+
+#progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #444;
+    border: 1px solid white;
+    position: relative;
+    
+}
+
+#progress-current {
+    height: 100%;
+    width: 0%;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: width 0.1s linear;
+}
+
+/* display time on song */
+#time-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: white;
+
+    margin-bottom: 20px;
+}
+
+/* control buttons */
+#buttonbox {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+    right: 25px;
+    border: 2px solid white;
+    border-style: outset;
+    padding: 10px;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 0;
+}
+
+.control-button {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 40px;
+    transition: background-color 0.25s;
+}
+
+.control-button:hover {
+    background-color: #333;
+}
+
+.control-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* search bar */
+.search-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    top: 80px;
+}
+
+#searchbar {
+    width: 100%;
+    height: 40px;
+    border: 2px dashed white;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: "Jersey 10", "consolas";
+    outline: none;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+#searchbar::placeholder {
+    text-align: center;
+    color: #888;
+}
+
+#search-results {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: black;
+    border: 1px solid white;
+    z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: #555 black;
+}
+
+.search-result {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-result:hover {
+    background-color: #333;
+}
+
+
+
+#addSongSearch-results {
+    position: absolute;
+    width: 94%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: black;
+    border: 1px solid white;
+    z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: #555 black;
+}
+
+.addSongSearch-result {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.addSongSearch-result:hover {
+    background-color: #333;
+}
+
+
+/* volume buttons */
+#volume-container {
+    background-color: white;
+    
+    position: absolute;
+    right: 3px;
+    top: 183px;
+
+    border-color: white;
+    border: 2px solid;
+
+    height: 100px;
+}
+
+.volume-button {
+    background-color: black;
+    height: 50px;
+    padding: 10px;
+    
+}
+
+#apiDisplay {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+
+    margin: 2px;
+
+    font-family: "Jersey 10", "consolas";
+    font-size: 12px;
+}
+
+
+/* hide elements */
+.hidden {
+    display: none;
+}
+
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+@media screen and (max-width: 400px) {
+    h1 {
+        margin: 20px;
+        font-size: 52px;
+    }
+    
+    .search-container {
+        
+        position: absolute;
+        top: 100px;
+        left: 35px;
+
+    }
+
+    #imagebox {
+        position: absolute;
+        bottom: 250px;
+        top: 150px;
+        left: 85px;
+        right: 85px;
+    }
+
+}
