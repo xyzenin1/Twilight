@@ -32,5 +32,4 @@ The Youtube file utilizes the onYouTubeIframeAPIReady function, meaning that it 
 # Still In Development
 This app is no where near finished due to only being worked on for a short period of time; for example, the shuffle function for the playlists is not implemented yet, but will be in the future.
 
-# Takeaways
 
