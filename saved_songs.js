@@ -132,7 +132,7 @@ function displaySavedPlaylists(playlists) {
     
     // Create a list of saved playlists
     playlists.forEach((playlistPath) => {
-        const playlistName = playlistPath.split('\\').pop().split('/').pop(); // Extract filename from path
+        const playlistName = playlistPath.split('\\').pop().split('/').pop().replace('.txt', ''); // Extract filename from path
         
         const playlistItem = document.createElement('div');
         playlistItem.className = 'saved-playlist-item';
