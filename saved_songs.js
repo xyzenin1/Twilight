@@ -4,6 +4,9 @@ let VideoId = '';
 let savedPlaylists = [];
 let selectedPlaylist = null;
 
+let isShuffleActive = false;
+originalSearchResults = [];
+
 window.appState = window.appState || {};
 window.appState.currentApiMode = 'youtube';
 
@@ -72,14 +75,6 @@ async function saveVideoId(videoId, videoTitle) {
         return;
     }
 
-    // console.log("Checking if video can be embedded...");
-    // const isEmbeddable = await checkYoutubeEmbed(videoId);
-
-    // if (!isEmbeddable) {
-    //     alert("This YouTube video cannot be embedded for some unknown reason.");
-    //     return;
-    // }
-
     const songData = `${videoId}|${videoTitle}\n`;
 
     try {
@@ -106,69 +101,6 @@ async function saveVideoId(videoId, videoTitle) {
     }
 
 }
-
-
-
-
-// // test youtube embedding in hidden iframe
-// async function checkYoutubeEmbed(videoId) {
-//     return new Promise((resolve) => {
-//         // check if video exists
-//         fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`)
-//             .then(response => {
-//                 if (response.ok) {
-//                     // check if embed works
-//                     const testIframe = document.createElement('iframe');
-//                     let timeoutId = null;
-
-//                     const cleanupAndResolve = (result) => {
-//                         if (timeoutId) clearTimeout(timeoutId);
-//                         testIframe.remove();
-//                         resolve(result);
-//                     };
-
-//                     testIframe.addEventListener('load', () => {
-//                         // small delay to initialize youtube
-//                         setTimeout(() => {
-//                             try {
-                        
-//                                 if (testIframe.contentWindow && !testIframe.contentWindow.document.body.innerText.includes("Video unavailable")) {
-//                                     cleanupAndResolve(true);
-//                                 } 
-//                                 else {
-//                                     cleanupAndResolve(false);
-//                                 }
-//                             } 
-//                             catch (e) {
-//                                 // if iframe does not work, assume embed works
-//                                 cleanupAndResolve(true);
-//                             }
-//                         }, 1000);
-//                     });
-
-//                     testIframe.addEventListener('error', () => {
-//                         cleanupAndResolve(false);
-//                     });
-
-//                     timeoutId = setTimeout(() => {
-//                         cleanupAndResolve(false);
-//                     }, 5000);
-
-//                     testIframe.style.display = 'none';
-//                     testIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=0`;
-//                     document.body.appendChild(testIframe);
-//                 } 
-//                 else {
-//                     // If all else fails, embed does not work
-//                     resolve(false);
-//                 }
-//             })
-//             .catch(() => {
-//                 resolve(false);
-//             });
-//     });
-// }
-
 
 
 
@@ -269,7 +201,17 @@ async function playSongFromPlaylist() {
         }
         
         // Set these songs as the current search results
-        searchResults = songs;
+        searchResults = [...songs];
+        originalSearchResults = [...songs];
+
+        if (isShuffleActive && searchResults.length > 1) {
+            // Fisher-Yates shuffle algorithm
+            for (let i = searchResults.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [searchResults[i], searchResults[j]] = [searchResults[j], searchResults[i]];
+            }
+        }
+
         currentIndex = -1;
         
         // play first song
@@ -286,10 +228,45 @@ async function playSongFromPlaylist() {
     }
 }
 
+function shuffleSongs() {
+    shuffleButton.classList.toggle('active');
+    isShuffleActive = shuffleButton.classList.contains('active');
+
+    if (searchResults && searchResults.length > 0) {
+        if (isShuffleActive) {
+        // original search results saved
+        originalSearchResults = [...searchResults];
+        }
+
+        for (let i = searchResults.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [searchResults[i], searchResults[j]] = [searchResults[j], searchResults[i]];
+        }
+        displaySearchResultsForList(searchResults);
+    }
+
+    else {
+        if (originalSearchResults.length > 0) {
+            searchResults = [...originalSearchResults];
+            displaySearchResultsForList(searchResults);
+        }
+    }
+
+    if (currentIndex !== -1 && player && player.getVideoData) {
+        const currentVideoId = player.getVideoData().video_id;
+        currentIndex = searchResults.findIndex(song => song.id.videoId === currentVideoId);
+    }
+
+    // debug
+    console.log("Shuffle mode:", isShuffleActive ? "ON" : "OFF");
+}
+
 
 playButton.addEventListener('click', () => {
     playSongFromPlaylist();
 });
+
+
 
 
 
@@ -351,4 +328,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
 
     });
+
+    shuffleButton.addEventListener('click', () => {
+        shuffleSongs();
+    });
+
 });

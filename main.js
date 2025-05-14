@@ -70,7 +70,7 @@ function createWindow() {
             webviewTag: true,
         },
         resizable: false,
-        frame: true,
+        frame: false,
         minimumWidth: 400,
         maximumWidth: 400,
         minimumHeight: 600,

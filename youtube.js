@@ -29,8 +29,9 @@ function onYouTubeIframeAPIReady() {
             'controls': 0,
             'disablekb': 1,
             'enablejsapi': 1,
-            'origin': 'file://',
-            'widget_referrer': 'YOUR_APP_NAME',
+            // 'origin': 'file://',
+            'host': 'https://www.youtube.com',
+            'widget_referrer': 'Twilight Music Player',
             'fs': 0
         },
         events: {
