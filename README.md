@@ -25,11 +25,22 @@ SPOTIFY_CLIENT_SECRET=
 SPOTIFY_REDIRECT_URI=
 
 
+# main.js
+
+
+# Youtube.js
 Youtube.js:
 
-The Youtube file utilizes the onYouTubeIframeAPIReady function, meaning that it allows Youtube videos to be played without the need to be seen in the app; the video is played in the background, so it acts like an audio player. 
+The Youtube file utilizes the onYouTubeIframeAPIReady function, meaning that it allows Youtube videos to be played without the need to be seen in the app; the video is played in the background, so it acts like an audio player.
+
+# spotify.js
+
+
+# saved_songs.js
+
+
 
 # Still In Development
-This app is no where near finished due to only being worked on for a short period of time; for example, the shuffle function for the playlists is not implemented yet, but will be in the future.
+This app is no where near finished, as there are many plans for this app int he near future.
 
 
