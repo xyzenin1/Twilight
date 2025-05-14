@@ -7,8 +7,14 @@ let selectedPlaylist = null;
 let isShuffleActive = false;
 originalSearchResults = [];
 
+window.searchResults = [];
+window.originalSearchResults = [];
+window.currentIndex = -1;
+window.player = null;
+
 window.appState = window.appState || {};
 window.appState.currentApiMode = 'youtube';
+
 
 async function searchSongsForList(query) {
 
@@ -32,6 +38,7 @@ async function searchSongsForList(query) {
             searchResultsForList = [];
             document.getElementById('addSongSearch-results').innerHTML = '';
             document.getElementById('addSongSearch-results').classList.add('hidden');
+            return;
         }
     } 
     catch (error) {
@@ -41,6 +48,12 @@ async function searchSongsForList(query) {
 
 function displaySearchResultsForList(results) {
     const resultsContainer = document.getElementById('addSongSearch-results');
+
+     if (!resultsContainer) {
+        console.error('Search results container not found');
+        return;
+    }
+
     resultsContainer.innerHTML = '';
     
     if (results.length === 0) {
@@ -101,8 +114,6 @@ async function saveVideoId(videoId, videoTitle) {
     }
 
 }
-
-
 
 
 function displaySavedPlaylists(playlists) {
@@ -168,7 +179,8 @@ async function loadSavedPlaylists() {
 
 async function playSongFromPlaylist() {
     if (!selectedPlaylist) {
-        alert("No playlist selected!");
+        console.error("No playlist selected!");
+        return;
     }
 
     try {
@@ -229,6 +241,7 @@ async function playSongFromPlaylist() {
 }
 
 function shuffleSongs() {
+    const shuffleButton = document.getElementById('shuffleButton');
     shuffleButton.classList.toggle('active');
     isShuffleActive = shuffleButton.classList.contains('active');
 
@@ -263,11 +276,19 @@ function shuffleSongs() {
 
 
 playButton.addEventListener('click', () => {
-    playSongFromPlaylist();
+    try {
+        playSongFromPlaylist();
+    } 
+    catch (err) {
+        console.error("Error playing from playlist:", err);
+
+        const resultsContainer = document.getElementById('addSongSearch-results');
+
+        if (resultsContainer) {
+            resultsContainer.classList.add('hidden');
+        }
+    }
 });
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
